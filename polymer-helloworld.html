@@ -1,0 +1,67 @@
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.0.1/lib/polymer/polymer.html">
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.0.1/lib/paper-input/paper-input.html">
+<!--<link rel="import" href="https://www.polymer-project.org/0.5/components/paper-input/paper-input-decorator.html">-->
+<link rel="import" href="https://cdn.rawgit.com/download/polymer-cdn/1.0.1/lib/paper-button/paper-button.html">
+
+<polymer-element name="polymer-helloworld">
+  <template>
+    <style>
+      :host {
+        display:block;
+      }
+      .hidden {
+        display:none;
+      }
+      paper-input-error {
+        float:none;
+      }
+    </style>
+    <paper-input label="{{ label }}" focused floatinglabel required pattern="^[a-zA-Z]*$"
+    id="helloworldInput" value="{{ name }}"></paper-input>
+    <div>
+      <paper-button raised id="helloworldButton">{{ buttonLabel }}</paper-button>
+    <div>
+    <p id="helloworldGreeting" class="hidden"></p>
+  </template>
+  <script>
+    Polymer({
+      is:'polymer-helloworld',
+      that: null,
+      properties: {
+        label: 'Your name here',
+        buttonLabel: 'Say hello!',
+        name:''
+      },
+      ready: function () {
+        that = this;
+
+        this.label= 'Your name here';
+        this.buttonLabel= 'Say hello!';
+
+        var button = that.$.helloworldButton;
+        button.onclick = this.clickListener;
+        var input = that.$.helloworldInput;
+        input.onfocus = this.focusListener;
+      },
+      clickListener: function() {
+        if(that.validate()) {
+          var name = that.name;
+          that.name = '';
+          that.$.helloworldGreeting.textContent = "Hello, " + name;
+          that.$.helloworldGreeting.classList.toggle('hidden');
+        }
+      },
+      focusListener:function() {
+        that.$.helloworldGreeting.classList.add('hidden');
+      },
+      validate : function() {
+        var input = that.$.helloworldInput;
+        if(!input.validate()) {
+          input.errorMessage="You must enter your name"
+          return false;
+        }
+        return true;
+      }
+    });
+  </script>
+</polymer-element>

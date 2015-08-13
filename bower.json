@@ -1,0 +1,17 @@
+{
+  "name": "polymer-helloworld",
+  "version": "0.0.0",
+  "homepage": "https://github.com/leidra/polymer-helloworld",
+  "authors": [
+    "Ardiel Fuentes <ardielfs@gmail.com>"
+  ],
+  "main": "polymer-helloworld.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
