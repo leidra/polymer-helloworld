@@ -21,7 +21,7 @@
     <div>
       <paper-button raised id="helloworldButton">{{ buttonLabel }}</paper-button>
     <div>
-    <p id="helloworldGreeting" class="hidden"></p>
+    <p id="helloworldGreeting" class="hidden">Hello, <span>{{greeting}}</span></p>
   </template>
   <script>
     Polymer({
@@ -30,7 +30,14 @@
       properties: {
         label: 'Your name here',
         buttonLabel: 'Say hello!',
-        name:''
+        name: {
+          type:String,
+          value:''
+        },
+        greeting: {
+          type:String,
+          value:''
+        }
       },
       ready: function () {
         that = this;
@@ -47,11 +54,13 @@
         if(that.validate()) {
           var name = that.name;
           that.name = '';
-          that.$.helloworldGreeting.textContent = "Hello, " + name;
+          that.greeting = name;
+          // Show the greeting container
           that.$.helloworldGreeting.classList.toggle('hidden');
         }
       },
       focusListener:function() {
+        // Hides the greeting container
         that.$.helloworldGreeting.classList.add('hidden');
       },
       validate : function() {
